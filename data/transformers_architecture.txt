@@ -1,0 +1,9 @@
+Transformers Architecture
+
+The Transformer architecture, introduced in the landmark paper "Attention Is All You Need," has revolutionized natural language processing and extended its influence to computer vision and other domains. Unlike recurrent neural networks that process sequences sequentially, transformers use self-attention mechanisms to process entire sequences in parallel, dramatically improving training efficiency and model performance.
+
+The core innovation of transformers is the self-attention mechanism, which allows the model to weigh the importance of different words in a sequence when encoding each word. This enables the model to capture long-range dependencies more effectively than RNNs or LSTMs. Multi-head attention extends this concept by computing attention in multiple representation subspaces simultaneously, allowing the model to focus on different aspects of the input.
+
+The transformer architecture consists of an encoder-decoder structure. The encoder processes input sequences and creates contextualized representations, while the decoder generates output sequences based on these representations. Each encoder and decoder layer contains a multi-head attention sublayer followed by a position-wise feed-forward network, with residual connections and layer normalization applied throughout.
+
+Since transformers have no inherent notion of sequence order, positional encodings are added to input embeddings to provide information about token positions. The original transformer used sinusoidal positional encodings, though learned positional embeddings have also proven effective. Transformer-based models like BERT, GPT, and T5 have achieved state-of-the-art results across numerous NLP tasks. Vision Transformers (ViT) have extended the architecture to image processing, demonstrating that the self-attention mechanism can effectively handle diverse data modalities beyond text sequences.

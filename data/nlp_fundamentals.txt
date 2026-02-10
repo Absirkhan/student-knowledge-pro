@@ -1,0 +1,9 @@
+Natural Language Processing Fundamentals
+
+Natural Language Processing (NLP) is a branch of artificial intelligence focused on enabling computers to understand, interpret, and generate human language. NLP combines computational linguistics with machine learning to bridge the gap between human communication and computer understanding. Applications range from machine translation and sentiment analysis to chatbots and text summarization.
+
+Text preprocessing is a crucial first step in NLP pipelines. Common preprocessing techniques include tokenization, which breaks text into individual words or subwords; stemming and lemmatization, which reduce words to their root forms; and stop word removal, which eliminates common words that carry little semantic meaning. These steps help standardize text and reduce dimensionality for downstream tasks.
+
+Feature extraction transforms raw text into numerical representations that machine learning models can process. Traditional approaches like Bag-of-Words and TF-IDF (Term Frequency-Inverse Document Frequency) create sparse vector representations based on word frequencies. While simple and interpretable, these methods fail to capture semantic relationships between words or understand context.
+
+Modern NLP has been transformed by word embeddings and contextualized representations. Word2Vec and GloVe create dense vector representations where semantically similar words have similar embeddings. These embeddings capture semantic relationships through vector arithmetic, enabling operations like finding analogies or measuring word similarity. More recent approaches like BERT and GPT use transformer architectures to generate context-dependent embeddings that understand word meaning based on surrounding text, leading to significant improvements across various NLP tasks.

@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-neutral-200;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Professional Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl px-6 py-2.5 text-sm font-medium
+           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-soft
+           hover:shadow-medium hover:from-primary-600 hover:to-primary-700
+           focus:ring-primary-500 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply bg-neutral-100 text-neutral-700 border border-neutral-200 shadow-soft
+           hover:bg-neutral-200 hover:border-neutral-300 hover:shadow-medium
+           focus:ring-neutral-400 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900
+           focus:ring-neutral-400;
+  }
+
+  /* Professional Card Styles */
+  .card {
+    @apply bg-white rounded-2xl shadow-soft border border-neutral-100
+           transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-medium hover:border-neutral-200;
+  }
+
+  .card-interactive {
+    @apply card-hover cursor-pointer active:scale-[0.99];
+  }
+
+  /* Professional Input Styles */
+  .input {
+    @apply w-full px-4 py-2.5 bg-white border border-neutral-200 rounded-xl
+           text-neutral-900 placeholder:text-neutral-400
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+           hover:border-neutral-300;
+  }
+
+  .input-error {
+    @apply input border-error focus:ring-error;
+  }
+
+  /* Professional Select/Dropdown Styles */
+  .select {
+    @apply input appearance-none bg-no-repeat cursor-pointer
+           bg-[length:20px] bg-[right_1rem_center]
+           pr-12;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M6 8l4 4 4-4' stroke='%2378716C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+
+  /* Badge/Tag Styles */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-primary-50 text-primary-700 border border-primary-200;
+  }
+
+  .badge-success {
+    @apply bg-success-light text-success-dark border border-success;
+  }
+
+  /* Section Headers */
+  .section-header {
+    @apply mb-8;
+  }
+
+  .section-title {
+    @apply text-3xl font-semibold text-neutral-900 mb-2;
+  }
+
+  .section-subtitle {
+    @apply text-neutral-500 text-base;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-br from-primary-600 to-accent-600 bg-clip-text text-transparent;
+  }
+
+  /* Smooth Transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Focus Visible Only */
+  .focus-visible-only {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+  }
+}

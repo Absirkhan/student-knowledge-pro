@@ -1,0 +1,9 @@
+Computer Vision
+
+Computer vision is a field of artificial intelligence that enables computers to extract meaningful information from digital images and videos. The goal is to automate tasks that the human visual system can perform, such as object recognition, scene understanding, and image segmentation. Computer vision has applications in autonomous vehicles, medical imaging, facial recognition, and augmented reality.
+
+Convolutional Neural Networks (CNNs) have become the dominant architecture for computer vision tasks. CNNs use specialized layers that apply convolution operations to detect features at different scales and levels of abstraction. Early layers identify simple patterns like edges and textures, while deeper layers recognize complex structures and objects. The hierarchical feature learning capability of CNNs eliminates the need for manual feature engineering.
+
+Key CNN architectures have driven progress in computer vision. AlexNet demonstrated the power of deep learning for image classification in 2012. VGGNet introduced the principle of using smaller filters in deeper networks. ResNet solved the degradation problem in very deep networks through residual connections, enabling networks with hundreds of layers. More recent architectures like EfficientNet optimize for both accuracy and computational efficiency.
+
+Common computer vision tasks include image classification, object detection, semantic segmentation, and instance segmentation. Object detection algorithms like YOLO and Faster R-CNN identify and localize multiple objects within images. Semantic segmentation assigns class labels to every pixel, while instance segmentation distinguishes between individual object instances. Transfer learning has become standard practice, where models pre-trained on large datasets like ImageNet are fine-tuned for specific tasks, significantly reducing training time and data requirements while improving performance.
