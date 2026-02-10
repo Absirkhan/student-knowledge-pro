@@ -1,0 +1,11 @@
+Machine Learning Basics
+
+Machine learning is a subset of artificial intelligence that enables computers to learn from data without being explicitly programmed. The core principle involves training algorithms on datasets to recognize patterns and make predictions or decisions based on new, unseen data.
+
+There are three primary types of machine learning: supervised learning, unsupervised learning, and reinforcement learning. Supervised learning uses labeled data to train models that can predict outcomes for new inputs. Common applications include classification tasks like spam detection and regression problems such as house price prediction.
+
+Unsupervised learning works with unlabeled data to discover hidden patterns or structures. Clustering algorithms like K-means and dimensionality reduction techniques like Principal Component Analysis (PCA) fall into this category. These methods are particularly useful for exploratory data analysis and feature engineering.
+
+The machine learning workflow typically involves several stages: data collection, data preprocessing, feature selection, model training, evaluation, and deployment. Data quality is crucial, as the performance of any machine learning model heavily depends on the quality and quantity of training data. Preprocessing steps such as normalization, handling missing values, and encoding categorical variables are essential for preparing data for model training.
+
+Model evaluation metrics vary depending on the task. For classification problems, accuracy, precision, recall, and F1-score are commonly used. For regression tasks, mean squared error (MSE) and R-squared values help assess model performance. Cross-validation techniques ensure that models generalize well to unseen data and are not overfitting to the training set.
