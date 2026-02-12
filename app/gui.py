@@ -420,7 +420,263 @@ async def get_embedding_status():
 # ============================================================================
 # Task 3: Semantic search endpoints
 # ============================================================================
-# Endpoints for performing semantic search queries
-# - POST /search/query - Perform semantic search
-# - POST /search/similar - Find similar documents
-# - GET /search/history - Get search history
+
+class VectorStoreListItem(BaseModel):
+    id: str
+    vector_db: str
+    embedding_model: str
+    display_name: str
+
+
+class SearchQueryRequest(BaseModel):
+    query: str
+    vector_store_id: str
+    top_k: int = 5
+
+
+class SearchResult(BaseModel):
+    rank: int
+    content: str
+    source_file: str
+    similarity_score: float
+
+
+class SearchQueryResponse(BaseModel):
+    query: str
+    total_results: int
+    vector_store_used: str
+    time_taken_seconds: float
+    results: List[SearchResult]
+
+
+class MultiQueryRequest(BaseModel):
+    queries: List[str]
+    vector_store_id: str
+    top_k: int = 5
+
+
+class MultiQueryResult(BaseModel):
+    query: str
+    results: List[SearchResult]
+
+
+class MultiQueryResponse(BaseModel):
+    vector_store_used: str
+    total_queries: int
+    time_taken_seconds: float
+    results: List[MultiQueryResult]
+
+
+@router.get("/search/vectorstores", response_model=List[VectorStoreListItem])
+async def get_available_vectorstores():
+    """
+    Get list of available vector stores by scanning Vector_Store/ directory.
+
+    Returns:
+        List of VectorStoreListItem with id, vector_db, and embedding_model
+    """
+    try:
+        from app.config import VECTOR_STORE_DIR
+
+        vector_stores = []
+
+        if not VECTOR_STORE_DIR.exists():
+            return vector_stores
+
+        # Scan all subdirectories in Vector_Store/
+        for store_dir in VECTOR_STORE_DIR.iterdir():
+            if store_dir.is_dir() and store_dir.name != '__pycache__':
+                # Parse directory name format: "VECTORDB_model-name"
+                # e.g., "FAISS_all-MiniLM-L6-v2" or "Chroma_all-mpnet-base-v2"
+                parts = store_dir.name.split('_', 1)
+                if len(parts) == 2:
+                    vector_db = parts[0]
+                    model_short_name = parts[1]
+
+                    # Reconstruct full model name (assuming sentence-transformers prefix)
+                    full_model_name = f"sentence-transformers/{model_short_name}"
+
+                    vector_stores.append(VectorStoreListItem(
+                        id=store_dir.name,
+                        vector_db=vector_db,
+                        embedding_model=full_model_name,
+                        display_name=f"{vector_db} - {model_short_name}"
+                    ))
+
+        # Sort by vector_db then model name for consistent ordering
+        vector_stores.sort(key=lambda x: (x.vector_db, x.embedding_model))
+
+        return vector_stores
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error listing vector stores: {str(e)}")
+
+
+@router.post("/search/query", response_model=SearchQueryResponse)
+async def search_query(request: SearchQueryRequest):
+    """
+    Perform semantic search on a specific vector store.
+
+    Args:
+        request: SearchQueryRequest with query, vector_store_id, and top_k
+
+    Returns:
+        SearchQueryResponse with ranked results and metadata
+    """
+    try:
+        start_time = time.time()
+
+        # Validate inputs
+        if not request.query or not request.query.strip():
+            raise HTTPException(status_code=400, detail="Query cannot be empty")
+
+        if request.top_k < 1 or request.top_k > 100:
+            raise HTTPException(status_code=400, detail="top_k must be between 1 and 100")
+
+        # Parse vector_store_id to extract vector_db and model_name
+        # Format: "VECTORDB_model-name"
+        parts = request.vector_store_id.split('_', 1)
+        if len(parts) != 2:
+            raise HTTPException(status_code=400, detail="Invalid vector_store_id format")
+
+        vector_db = parts[0]
+        model_short_name = parts[1]
+        model_name = f"sentence-transformers/{model_short_name}"
+
+        # Load the vector store
+        vectorstore = embedding_utils.load_vector_store(vector_db, model_name)
+
+        if vectorstore is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Vector store '{request.vector_store_id}' not found or failed to load"
+            )
+
+        # Perform similarity search with scores
+        docs_with_scores = vectorstore.similarity_search_with_score(
+            request.query,
+            k=request.top_k
+        )
+
+        # Process results
+        results = []
+        for rank, (doc, score) in enumerate(docs_with_scores, start=1):
+            # Convert distance to similarity score (normalized to 0-1, where 1 = most similar)
+            # For FAISS/Chroma with L2 distance, lower scores are better
+            # We'll normalize by converting: similarity = 1 / (1 + distance)
+            similarity_score = 1.0 / (1.0 + score)
+
+            # Get source file from metadata
+            source_file = doc.metadata.get('source', 'Unknown')
+
+            results.append(SearchResult(
+                rank=rank,
+                content=doc.page_content,
+                source_file=source_file,
+                similarity_score=round(similarity_score, 4)
+            ))
+
+        time_taken = time.time() - start_time
+
+        return SearchQueryResponse(
+            query=request.query,
+            total_results=len(results),
+            vector_store_used=request.vector_store_id,
+            time_taken_seconds=round(time_taken, 3),
+            results=results
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error performing search: {str(e)}")
+
+
+@router.post("/search/multi-query", response_model=MultiQueryResponse)
+async def multi_query_search(request: MultiQueryRequest):
+    """
+    Perform multiple semantic search queries against the same vector store.
+    Useful for batch evaluation and testing.
+
+    Args:
+        request: MultiQueryRequest with list of queries, vector_store_id, and top_k
+
+    Returns:
+        MultiQueryResponse with results grouped by query
+    """
+    try:
+        start_time = time.time()
+
+        # Validate inputs
+        if not request.queries or len(request.queries) == 0:
+            raise HTTPException(status_code=400, detail="Queries list cannot be empty")
+
+        if request.top_k < 1 or request.top_k > 100:
+            raise HTTPException(status_code=400, detail="top_k must be between 1 and 100")
+
+        # Parse vector_store_id
+        parts = request.vector_store_id.split('_', 1)
+        if len(parts) != 2:
+            raise HTTPException(status_code=400, detail="Invalid vector_store_id format")
+
+        vector_db = parts[0]
+        model_short_name = parts[1]
+        model_name = f"sentence-transformers/{model_short_name}"
+
+        # Load the vector store once for all queries
+        vectorstore = embedding_utils.load_vector_store(vector_db, model_name)
+
+        if vectorstore is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Vector store '{request.vector_store_id}' not found or failed to load"
+            )
+
+        # Process each query
+        all_results = []
+        for query in request.queries:
+            if not query or not query.strip():
+                continue
+
+            # Perform similarity search
+            docs_with_scores = vectorstore.similarity_search_with_score(
+                query,
+                k=request.top_k
+            )
+
+            # Process results for this query
+            query_results = []
+            for rank, (doc, score) in enumerate(docs_with_scores, start=1):
+                similarity_score = 1.0 / (1.0 + score)
+                source_file = doc.metadata.get('source', 'Unknown')
+
+                query_results.append(SearchResult(
+                    rank=rank,
+                    content=doc.page_content,
+                    source_file=source_file,
+                    similarity_score=round(similarity_score, 4)
+                ))
+
+            all_results.append(MultiQueryResult(
+                query=query,
+                results=query_results
+            ))
+
+        time_taken = time.time() - start_time
+
+        return MultiQueryResponse(
+            vector_store_used=request.vector_store_id,
+            total_queries=len(all_results),
+            time_taken_seconds=round(time_taken, 3),
+            results=all_results
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error performing multi-query search: {str(e)}")
+
+
+# ============================================================================
+# End of Task 3 endpoints
+# ============================================================================
