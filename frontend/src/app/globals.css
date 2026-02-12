@@ -21,51 +21,53 @@
 }
 
 @layer components {
-  /* Professional Button Styles */
+  /* Professional Button Styles - Refined and Modern */
   .btn {
-    @apply inline-flex items-center justify-center rounded-xl px-6 py-2.5 text-sm font-medium
+    @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold
            transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2
-           disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none;
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none
+           border border-transparent;
   }
 
   .btn-primary {
-    @apply bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-soft
-           hover:shadow-medium hover:from-primary-600 hover:to-primary-700
-           focus:ring-primary-500 active:scale-[0.98];
+    @apply bg-accent-600 text-white shadow-sm
+           hover:bg-accent-700 hover:shadow-md
+           focus:ring-accent-500 active:scale-[0.98]
+           border-accent-600 hover:border-accent-700;
   }
 
   .btn-secondary {
-    @apply bg-neutral-100 text-neutral-700 border border-neutral-200 shadow-soft
-           hover:bg-neutral-200 hover:border-neutral-300 hover:shadow-medium
+    @apply bg-white text-neutral-700 border-neutral-300 shadow-sm
+           hover:bg-neutral-50 hover:border-neutral-400 hover:shadow-md
            focus:ring-neutral-400 active:scale-[0.98];
   }
 
   .btn-ghost {
     @apply text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900
-           focus:ring-neutral-400;
+           focus:ring-neutral-400 shadow-none;
   }
 
-  /* Professional Card Styles */
+  /* Professional Card Styles - Clean and Modern */
   .card {
-    @apply bg-white rounded-2xl shadow-soft border border-neutral-100
+    @apply bg-white rounded-xl shadow-sm border border-neutral-200
            transition-all duration-200;
   }
 
   .card-hover {
-    @apply card hover:shadow-medium hover:border-neutral-200;
+    @apply card hover:shadow-md hover:border-neutral-300;
   }
 
   .card-interactive {
     @apply card-hover cursor-pointer active:scale-[0.99];
   }
 
-  /* Professional Input Styles */
+  /* Professional Input Styles - Refined */
   .input {
-    @apply w-full px-4 py-2.5 bg-white border border-neutral-200 rounded-xl
+    @apply w-full px-4 py-2.5 bg-white border border-neutral-300 rounded-lg
            text-neutral-900 placeholder:text-neutral-400
            transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
-           hover:border-neutral-300;
+           focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500
+           hover:border-neutral-400;
   }
 
   .input-error {
@@ -77,16 +79,16 @@
     @apply input appearance-none bg-no-repeat cursor-pointer
            bg-[length:20px] bg-[right_1rem_center]
            pr-12;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M6 8l4 4 4-4' stroke='%2378716C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M6 8l4 4 4-4' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
 
-  /* Badge/Tag Styles */
+  /* Badge/Tag Styles - Subtle and Modern */
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium;
+    @apply inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium;
   }
 
   .badge-primary {
-    @apply bg-primary-50 text-primary-700 border border-primary-200;
+    @apply bg-accent-50 text-accent-700 border border-accent-200;
   }
 
   .badge-success {

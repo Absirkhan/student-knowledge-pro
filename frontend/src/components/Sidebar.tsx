@@ -44,16 +44,22 @@ export default function Sidebar() {
       {/* Header */}
       <div className="mb-10">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center shadow-lg">
-            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <div className="w-11 h-11 bg-gradient-to-br from-accent-500 to-accent-600 rounded-lg flex items-center justify-center shadow-lg relative overflow-hidden">
+            {/* Custom geometric logo - layered hexagons representing vector embeddings */}
+            <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7V17L12 22L21 17V7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.9"/>
+              <circle cx="8" cy="9" r="1.5" fill="currentColor" opacity="0.6"/>
+              <circle cx="16" cy="9" r="1.5" fill="currentColor" opacity="0.6"/>
+              <circle cx="8" cy="15" r="1.5" fill="currentColor" opacity="0.6"/>
+              <circle cx="16" cy="15" r="1.5" fill="currentColor" opacity="0.6"/>
             </svg>
           </div>
           <div>
             <h1 className="text-xl font-semibold tracking-tight">Semantic Search</h1>
           </div>
         </div>
-        <p className="text-neutral-400 text-sm pl-[52px]">AI Research Assistant</p>
+        <p className="text-neutral-400 text-sm pl-[56px]">AI Research Assistant</p>
       </div>
 
       {/* Navigation */}
@@ -68,7 +74,7 @@ export default function Sidebar() {
                 group relative flex items-center gap-3 px-4 py-3.5 rounded-xl
                 transition-all duration-200
                 ${isActive
-                  ? 'bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/30'
+                  ? 'bg-gradient-to-br from-accent-500 to-accent-600 text-white shadow-lg shadow-accent-500/20'
                   : 'text-neutral-300 hover:bg-neutral-800/60 hover:text-white'
                 }
               `}
@@ -91,7 +97,7 @@ export default function Sidebar() {
                 <div className="flex items-center gap-2">
                   <span className="font-medium">{item.name}</span>
                 </div>
-                <div className={`text-xs ${isActive ? 'text-primary-100' : 'text-neutral-500 group-hover:text-neutral-400'}`}>
+                <div className={`text-xs ${isActive ? 'text-accent-100' : 'text-neutral-500 group-hover:text-neutral-400'}`}>
                   {item.label}
                 </div>
               </div>
@@ -109,12 +115,11 @@ export default function Sidebar() {
 
       {/* Footer */}
       <div className="mt-auto pt-6 border-t border-neutral-800/50">
-        <div className="flex items-center gap-3 px-2">
-          <div className="flex-1">
-            <p className="text-xs font-medium text-neutral-400">University Project</p>
-            <p className="text-xs text-neutral-500 mt-0.5">FastAPI + Next.js</p>
+        <div className="flex items-center justify-between px-2">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-success rounded-full animate-pulse" title="System Ready" />
+            <span className="text-xs text-neutral-400">System Online</span>
           </div>
-          <div className="w-2 h-2 bg-success rounded-full animate-pulse" title="System Ready" />
         </div>
       </div>
     </aside>

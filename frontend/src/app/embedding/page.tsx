@@ -168,7 +168,7 @@ export default function EmbeddingPage() {
               value={selectedModel}
               onChange={(e) => setSelectedModel(e.target.value)}
               disabled={isProcessing}
-              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-accent-500 disabled:opacity-50 disabled:cursor-not-allowed bg-white"
             >
               {embeddingModels.map((model) => (
                 <option key={model} value={model}>
@@ -191,7 +191,7 @@ export default function EmbeddingPage() {
               value={selectedVectorDB}
               onChange={(e) => setSelectedVectorDB(e.target.value)}
               disabled={isProcessing}
-              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-accent-500 disabled:opacity-50 disabled:cursor-not-allowed bg-white"
             >
               {vectorDbs.map((db) => (
                 <option key={db} value={db}>
@@ -306,14 +306,14 @@ export default function EmbeddingPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {existingStores.map((store, index) => (
-              <div key={index} className="border border-neutral-200 rounded-lg p-5 hover:border-primary-300 hover:bg-primary-50/30 transition-all">
+              <div key={index} className="border border-neutral-200 rounded-lg p-5 hover:border-accent-400 hover:bg-accent-50/30 transition-all">
                 <div className="flex items-start justify-between mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-10 h-10 rounded-lg bg-accent-100 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
                     </svg>
                   </div>
-                  <span className="badge bg-neutral-100 text-neutral-600 text-xs">{store.vector_db}</span>
+                  <span className="badge bg-neutral-100 text-neutral-700 text-xs">{store.vector_db}</span>
                 </div>
 
                 <h3 className="font-semibold text-neutral-900 mb-2 truncate" title={store.store_name}>

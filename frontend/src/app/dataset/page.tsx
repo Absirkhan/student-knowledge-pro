@@ -204,45 +204,45 @@ export default function DatasetPage() {
 
       {/* Dataset Stats */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="card p-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="card p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary-50 border border-primary-100 flex items-center justify-center">
-                <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-12 h-12 rounded-lg bg-accent-50 flex items-center justify-center">
+                <svg className="w-6 h-6 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
               <div>
                 <p className="text-2xl font-bold text-neutral-900">{stats.total_documents}</p>
-                <p className="text-sm text-neutral-500">Total Documents</p>
+                <p className="text-sm text-neutral-600">Total Documents</p>
               </div>
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="card p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-accent-50 border border-accent-100 flex items-center justify-center">
-                <svg className="w-6 h-6 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-12 h-12 rounded-lg bg-primary-100 flex items-center justify-center">
+                <svg className="w-6 h-6 text-primary-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
                 </svg>
               </div>
               <div>
                 <p className="text-2xl font-bold text-neutral-900">{stats.total_size_readable}</p>
-                <p className="text-sm text-neutral-500">Total Size</p>
+                <p className="text-sm text-neutral-600">Total Size</p>
               </div>
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="card p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-success-light border border-success flex items-center justify-center">
+              <div className="w-12 h-12 rounded-lg bg-success-light flex items-center justify-center">
                 <svg className="w-6 h-6 text-success-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
               <div>
                 <p className="text-2xl font-bold text-neutral-900">{stats.average_document_size_readable}</p>
-                <p className="text-sm text-neutral-500">Average Size</p>
+                <p className="text-sm text-neutral-600">Average Size</p>
               </div>
             </div>
           </div>
@@ -264,21 +264,21 @@ export default function DatasetPage() {
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           className={`
-            relative border-2 border-dashed rounded-2xl p-12 text-center transition-all duration-300
+            relative border-2 border-dashed rounded-xl p-12 text-center transition-all duration-300
             ${isDragActive
-              ? 'border-primary-500 bg-primary-50/50 scale-[1.02]'
-              : 'border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50/50'
+              ? 'border-accent-500 bg-accent-50/50 scale-[1.01]'
+              : 'border-neutral-300 hover:border-neutral-400 hover:bg-neutral-50'
             }
           `}
         >
           {/* Upload Icon */}
           <div className={`
-            mx-auto w-16 h-16 mb-4 rounded-2xl flex items-center justify-center transition-all duration-300
+            mx-auto w-16 h-16 mb-4 rounded-xl flex items-center justify-center transition-all duration-300
             ${isDragActive
-              ? 'bg-primary-100 text-primary-600 scale-110'
+              ? 'bg-accent-100 text-accent-600 scale-110'
               : isUploading
-              ? 'bg-primary-100 text-primary-600'
-              : 'bg-neutral-100 text-neutral-400'
+              ? 'bg-accent-100 text-accent-600'
+              : 'bg-neutral-100 text-neutral-500'
             }
           `}>
             {isUploading ? (
@@ -347,17 +347,17 @@ export default function DatasetPage() {
 
         {isLoading ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-primary-50 flex items-center justify-center">
-              <svg className="animate-spin h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-accent-50 flex items-center justify-center">
+              <svg className="animate-spin h-8 w-8 text-accent-600" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
             </div>
-            <p className="text-neutral-500 font-medium">Loading documents...</p>
+            <p className="text-neutral-600 font-medium">Loading documents...</p>
           </div>
         ) : documents.length === 0 ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-neutral-100 flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-neutral-100 flex items-center justify-center">
               <svg className="w-8 h-8 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
@@ -383,8 +383,8 @@ export default function DatasetPage() {
                   >
                     <td className="py-4 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center flex-shrink-0">
-                          <svg className="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div className="w-10 h-10 rounded-lg bg-accent-50 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-5 h-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                           </svg>
                         </div>
@@ -398,7 +398,7 @@ export default function DatasetPage() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => handleView(doc.filename)}
-                          className="btn btn-ghost text-primary-600 hover:bg-primary-50 px-3 py-1.5 text-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="btn btn-ghost text-accent-600 hover:bg-accent-50 px-3 py-1.5 text-sm opacity-0 group-hover:opacity-100 transition-opacity"
                           title="View document"
                         >
                           <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -434,14 +434,14 @@ export default function DatasetPage() {
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] flex flex-col animate-scale-in"
+            className="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] flex flex-col animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-neutral-200">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-10 h-10 rounded-lg bg-accent-50 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
@@ -486,9 +486,9 @@ export default function DatasetPage() {
       {/* Loading Overlay for Document */}
       {isLoadingDocument && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 shadow-xl">
+          <div className="bg-white rounded-xl p-8 shadow-xl">
             <div className="flex items-center gap-4">
-              <svg className="animate-spin h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin h-8 w-8 text-accent-600" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
